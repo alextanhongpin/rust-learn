@@ -62,3 +62,37 @@ fn main() {
 // [13, 14]
 // [1, 2, 13, 14, 5, 6, 7, 8, 9]
 ```
+
+## Modifying vectors
+
+```rust
+fn main() {
+    let mut nums: Vec<i8> = (1..10).collect();
+    {
+        let numbers = &mut nums[2..4];
+        println!("numbers is {:?}", numbers);
+        for i in numbers.iter_mut() {
+            *i += 10;
+        }
+        println!("{:?}", numbers);
+    }
+    
+    {
+        let numbers = &mut nums.iter_mut().filter(|ref i| ***i % 2 == 0).collect::<Vec<_>>();
+        println!("numbers is {:?}", numbers);
+        println!("first is {:?}", numbers[0]);
+        *numbers[0] *= 30;
+        for ref mut i in numbers.iter_mut() {
+            ***i += 22;
+        }
+        println!("updated numbers is {:?}", numbers);
+    }
+    println!("{:?}", nums);
+}
+// numbers is [3, 4]
+// [13, 14]
+// numbers is [2, 14, 6, 8]
+// first is 2
+// updated numbers is [82, 36, 28, 30]
+// [1, 82, 13, 36, 5, 28, 7, 30, 9]
+```
