@@ -1,3 +1,10 @@
+# Vector 
+
+- is allocated on the heap
+- can grow or shrink in size
+- all elements must be of the same type
+
+
 ## Creating a vector from range
 
 ```rust
@@ -95,4 +102,45 @@ fn main() {
 // first is 2
 // updated numbers is [82, 36, 28, 30]
 // [1, 82, 13, 36, 5, 28, 7, 30, 9]
+```
+
+## Basic 
+
+Vector can be constructed from iterators through the `.collect()` method. Example with `range`:
+```rust
+fn main() {
+    let nums: Vec<i32> = (0..7).collect();
+    println!("{:?}", nums);
+    
+    // Without .iter(), the numbers will be moved, and the println! below will
+    // not work.
+    for n in nums.iter() {
+        print!("{} ", n);
+    }
+    println!("{:?}", nums);
+    
+    let mut nums: Vec<i32> = (0..5).collect();
+    let n = nums.pop().unwrap();
+    println!("{}", n);
+    println!("{:?}", nums);
+    
+    nums.push(10);
+    println!("{:?}", nums);
+    
+    // Mutating the vectors.
+    for n in nums.iter_mut() {
+        *n += 10;
+    }
+    println!("{:?}", nums);
+}
+```
+
+Output:
+```
+[0, 1, 2, 3, 4, 5, 6]
+0 1 2 3 4 5 6 [0, 1, 2, 3, 4, 5, 6]
+4
+[0, 1, 2, 3]
+[0, 1, 2, 3, 10]
+[10, 11, 12, 13, 20]
 ```
