@@ -5,11 +5,7 @@ trait Countable {
 
 impl Countable for str {
     fn count(&self, ch: char) -> i8 {
-        self.chars().map(|c| match c == ch {
-            true => 1,
-            _ => 0
-        }
-        ).fold(0, |sum, i| sum + i)
+        self.chars().filter(|c| *c == ch).count() as i8
     }
 }
 
