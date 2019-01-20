@@ -144,3 +144,39 @@ Output:
 [0, 1, 2, 3, 10]
 [10, 11, 12, 13, 20]
 ```
+
+## Map, filter
+```
+fn main() {
+ let nums: Vec<i32> = (1..100).collect();
+ let total = nums.iter().fold(0, |sum, i| sum + i);
+ println!("{:?}", total);
+ 
+ let min = nums.iter().min();
+ println!("{:?}", min);
+ 
+ let max = nums.iter().max();
+ println!("{:?}", max);
+ 
+ // clone().into_iter()
+ let count = nums.iter().count();
+ println!("{:?}", count);
+ 
+ let even = nums.iter().filter(|&i| i % 2 == 0).collect::<Vec<_>>();
+ println!("{:?}", even.len());
+ println!("{:?}", &even[..5]);
+ println!("{:?}", nums.len());
+}
+```
+
+Output:
+
+```
+4950
+Some(1)
+Some(99)
+99
+49
+[2, 4, 6, 8, 10]
+99
+```
