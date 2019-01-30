@@ -9,8 +9,13 @@ fn main() {
     let encoded = json::encode(&svc);
     println!("{:?}", encoded);
     let jsonstr = encoded.unwrap();
+    println!("{:?}", jsonstr);
+    
     let decoded: Result<Service,_> = json::decode(&jsonstr);
-    println!("{:?}", decoded);    
+    if let Ok(ref svc) = decoded {
+        println!("{}", svc.get());
+    }
+    println!("{:?}", decoded);
 }
 
 #[derive(Debug, RustcDecodable, RustcEncodable)]
