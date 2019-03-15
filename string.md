@@ -20,7 +20,7 @@ fn main() {
     for c in name.chars() {
         println!("char is {}", c);
     }
-    
+    // NOTE: Use .split_whitespace()
     for word in name.split(" ") {
         println!("word is {}", word);
     }
@@ -58,4 +58,30 @@ word is john
 word is doe
 jane doe
 john doe
+```
+
+
+## Splitting Token
+```rust
+const BEARER: &str = "Bearer";
+const BASIC: &str = "Basic";
+
+fn main() {
+    let auth_header: &str = "Bearer xxx";
+    let paths: Vec<&str> = auth_header.split_whitespace().collect();
+    let res = match paths.len() {
+        2 => {
+            match paths[0] {
+                BEARER => Ok(paths[1]),
+                BASIC => Ok(paths[1]),
+                _ => Err("invalid authorization header")
+            }
+        },
+        _ => Err("invalid authorization header")
+    };
+    match res {
+        Ok(v) => println!("success: {}", v),
+        Err(e) => println!("error: {}", e)
+    }
+}
 ```
