@@ -186,3 +186,27 @@ fn main() {
     println!("{:?}", numbers);
 }
 ```
+
+
+## Sharing Data
+```rs
+use std::thread;
+use std::sync::{Mutex, Arc};
+
+fn main() {
+
+    let v = Arc::new(Mutex::new(vec![]));
+    let handles = (0..10).map(|i| {
+        let vector = Arc::clone(&v);
+        thread::spawn(move|| {
+            let mut v = vector.lock().unwrap();
+            (*v).push(i);
+        })
+    });
+    for h in handles {
+        h.join().unwrap();
+    }
+    let values = (*v).lock().unwrap();
+    println!("{:?}", values);
+}
+```
