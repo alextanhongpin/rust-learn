@@ -32,3 +32,47 @@ In `main.rs`:
 // Import the module hello.
 mod hello;
 ```
+
+
+## Rust 2018 file structure
+`main.rs`:
+
+```rs
+mod greet;
+
+fn main() {
+    greet::hello();
+    greet::scream::exec();
+}
+```
+
+`greet.rs`:
+```rs
+pub mod salutation;
+pub mod scream;
+
+pub fn hello() {
+    println!("hello world!");
+}
+```
+
+`greet/scream.rs`:
+```rs
+// Super refers to relative to this folder.
+use super::salutation;
+
+pub fn exec() {
+    println!("screaming!");
+    salutation::salute();
+    // Create is relative to project.
+    // crate::greet::salutation::salute();
+}
+```
+
+`greet/salutation.rs`:
+
+```rs
+pub fn salute() {
+    println!("hello!");
+}
+```
