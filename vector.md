@@ -180,3 +180,52 @@ Some(99)
 [2, 4, 6, 8, 10]
 99
 ```
+
+
+## Rust filter and map
+
+```rust
+fn main() {
+    let numbers = [1,2,3,4,5];
+    
+    let multiples_one = numbers.iter().map(|i| i * 2).filter(|i| *i > 2);
+    let multiples_two = numbers.iter().filter(|i| **i > 2).map(|i| i * 2);
+    
+    for i in multiples_one {
+        println!("number is {}", i);
+    }
+    
+    for n in multiples_two {
+        println!("number is {}", n);
+    }
+}
+```
+
+## Extract header
+```rust
+fn main() {
+    let headers = "bearer xyz";
+    println!("got {:?}", auth_header(&headers));
+
+    
+    match auth_header(&headers) {
+      Ok((bearer, token)) => match bearer.as_str() {
+          "bearer" => println!("is bearer: {}", token),
+          "basic" => println!("is basic: {}", token),
+          _ => println!("rest")
+      }
+      Err(e) => println!("got error {:?}", e)
+    }
+}
+
+
+fn auth_header(s: &str) -> Result<(String, String), &'static str> {
+    if s.len() < 6 {
+        Err("bad request")
+    } else {
+        let (bearer, token) = (&s[0..6], &s[7..]);
+        let lowercase_bearer = String::from(bearer.to_owned());
+        Ok((lowercase_bearer, token.to_owned()))
+    }
+}
+```
