@@ -146,7 +146,7 @@ Output:
 ```
 
 ## Map, filter
-```
+```rust
 fn main() {
  let nums: Vec<i32> = (1..100).collect();
  let total = nums.iter().fold(0, |sum, i| sum + i);
@@ -227,5 +227,21 @@ fn auth_header(s: &str) -> Result<(String, String), &'static str> {
         let lowercase_bearer = String::from(bearer.to_owned());
         Ok((lowercase_bearer, token.to_owned()))
     }
+}
+```
+
+## Pattern match vector
+
+It is possible to pattern match a vector slice:
+```rust
+fn main() {
+    let names = "hello world"; // "hello world this" will result to "nono"
+    let spaces: Vec<String> = names.split_whitespace().map(|s| s.to_string()).collect();
+    
+    match spaces.as_slice() {
+        [a, b] => println!("a: {} b: {}", a, b),
+        _ => println!("nono")
+    }
+    println!("{:?}", spaces);
 }
 ```
