@@ -97,3 +97,14 @@ fn main() {
     println!("{:?}", names);
 }
 ```
+
+## Parse int
+
+```rust
+fn main() {
+    let score = "-1";
+    // NOTE: If you change the type to u32, this will produce error. 
+    let score: u32 = score.parse().unwrap();
+    println!("{:?}", score);
+}
+```
