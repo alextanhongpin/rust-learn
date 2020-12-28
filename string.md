@@ -85,3 +85,15 @@ fn main() {
     }
 }
 ```
+
+## Contains and replace
+
+```rust
+fn main() {
+    let names = "hello world";
+    println!("{:?}", names.contains("hello"));
+    
+    let names = names.replace("hello", "hi");
+    println!("{:?}", names);
+}
+```
