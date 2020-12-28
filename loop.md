@@ -13,3 +13,21 @@ fn main() {
     }
 }
 ```
+
+
+## Reverse range
+
+A forward loop is like this:
+```rust
+for x in 0..100 {
+    println!("{}", x);
+}
+```
+
+And a reverse loop is done by calling Iterator::rev to reverse the order:
+
+```rust
+for x in (0..100).rev() {
+    println!("{}", x);
+}
+```
